@@ -1,0 +1,3 @@
+[submodule "src/trace-ros-connector"]
+	url = https://github.com/DigitalGabriele/trace-ros-connector.git
+	branch = devel
