@@ -1,0 +1,6 @@
+<library path="libtrace_blueye_ros_connector">
+  <class
+    name="trace_blueye_ros_connector"
+    type="trace::blueye_ros_connector::Connector"
+    base_class_type="trace::Connector"/>
+</library>

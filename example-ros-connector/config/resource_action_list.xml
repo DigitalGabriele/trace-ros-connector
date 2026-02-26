@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <resource_list>
   <resource>
-      <resource_name>example_action_server</resource_name>
-      <action_topic>example_action_server</action_topic>
-      <action_type>example_msgs/ExampleAction</action_type>
-  </resource>
+  <resource_name>run_waypoint_controller</resource_name>
+  <service_topic>/blueye/run_waypoint_controller</service_topic>
+  <service_type>blueye_interfaces/srv/RunWaypointController</service_type>
+</resource>
 </resource_list>
