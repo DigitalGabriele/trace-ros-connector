@@ -12,7 +12,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "blueye_interfaces/srv/run_waypoint_controller.hpp"
-#include "blueye_ros_connector/specific_client.h"
+#include "blueye_ros_connector/blueye_service_task_client.h"
 
 namespace trace {
 namespace blueye_ros_connector {
@@ -123,8 +123,8 @@ std::string int_to_string(std::int32_t value)
 
 }  // namespace
 
-SpecificClient::SpecificClient()
-: Node("blueye_specific_client")
+BlueyeServiceTaskClient::BlueyeServiceTaskClient()
+: Node("blueye_service_task_client")
 {
   // Create service client
   run_wp_client_ = this->create_client<RunWaypointController>("/blueye/run_waypoint_controller");
@@ -142,7 +142,7 @@ SpecificClient::SpecificClient()
   start_executor_();
 }
 
-SpecificClient::SpecificClient(const std::string &node_name)
+BlueyeServiceTaskClient::BlueyeServiceTaskClient(const std::string &node_name)
 : Node(node_name)
 {
   run_wp_client_ = this->create_client<RunWaypointController>("/blueye/run_waypoint_controller");
@@ -160,12 +160,12 @@ SpecificClient::SpecificClient(const std::string &node_name)
   start_executor_();
 }
 
-SpecificClient::~SpecificClient()
+BlueyeServiceTaskClient::~BlueyeServiceTaskClient()
 {
   stop_executor_();
 }
 
-void SpecificClient::start_executor_()
+void BlueyeServiceTaskClient::start_executor_()
 {
   std::lock_guard<std::mutex> lock(executor_mutex_);
   if (executor_running_.load()) {
@@ -179,7 +179,7 @@ void SpecificClient::start_executor_()
   });
 }
 
-void SpecificClient::stop_executor_()
+void BlueyeServiceTaskClient::stop_executor_()
 {
   std::lock_guard<std::mutex> lock(executor_mutex_);
   if (!executor_running_.load()) {
@@ -196,7 +196,7 @@ void SpecificClient::stop_executor_()
   executor_.remove_node(this->get_node_base_interface());
 }
 
-void SpecificClient::Connect()
+void BlueyeServiceTaskClient::Connect()
 {
   // Best effort connectivity checks.
   const bool run_available =
@@ -224,20 +224,20 @@ void SpecificClient::Connect()
               static_cast<int>(insert_wp_available), static_cast<int>(remove_wp_available));
 }
 
-std::future<trace::Outcome> SpecificClient::SendCommand(
+std::future<trace::Outcome> BlueyeServiceTaskClient::SendCommand(
   const std::string &service_task_uuid,
   const PropertyMap &properties)
 {
-  return std::async(std::launch::async, &SpecificClient::RunTask, this, service_task_uuid, properties);
+  return std::async(std::launch::async, &BlueyeServiceTaskClient::RunTask, this, service_task_uuid, properties);
 }
 
-void SpecificClient::AbortCommand(const std::string &service_task_uuid)
+void BlueyeServiceTaskClient::AbortCommand(const std::string &service_task_uuid)
 {
   (void)service_task_uuid;
   // ROS2 services have no standard cancel. No-op.
 }
 
-trace::Outcome SpecificClient::RunTask(
+trace::Outcome BlueyeServiceTaskClient::RunTask(
   const std::string &service_task_uuid,
   const PropertyMap &properties)
 {

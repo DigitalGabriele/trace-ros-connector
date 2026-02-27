@@ -16,7 +16,7 @@
 
 
 #include "blueye_ros_connector/connector.h"
-#include "blueye_ros_connector/specific_client.h" 
+#include "blueye_ros_connector/blueye_service_task_client.h" 
 
 #include <rclcpp/rclcpp.hpp>
 #include <atomic>
@@ -61,15 +61,15 @@ void Connector::initialize() {
   //       "Unable to create action files from XML configuration.");
   // }
 
-  auto specific_client = std::make_shared<SpecificClient>();
-  this->resource_to_client_map["run_waypoint_controller"] = specific_client;
-  this->resource_to_client_map["add_waypoint"] = specific_client;
-  this->resource_to_client_map["go_to_waypoints"] = specific_client;
-  this->resource_to_client_map["clear_waypoints"] = specific_client;
-  this->resource_to_client_map["get_waypoint_status"] = specific_client;
-  this->resource_to_client_map["get_waypoints"] = specific_client;
-  this->resource_to_client_map["insert_waypoint"] = specific_client;
-  this->resource_to_client_map["remove_waypoint"] = specific_client;
+  auto blueye_service_task_client = std::make_shared<BlueyeServiceTaskClient>();
+  this->resource_to_client_map["run_waypoint_controller"] = blueye_service_task_client;
+  this->resource_to_client_map["add_waypoint"] = blueye_service_task_client;
+  this->resource_to_client_map["go_to_waypoints"] = blueye_service_task_client;
+  this->resource_to_client_map["clear_waypoints"] = blueye_service_task_client;
+  this->resource_to_client_map["get_waypoint_status"] = blueye_service_task_client;
+  this->resource_to_client_map["get_waypoints"] = blueye_service_task_client;
+  this->resource_to_client_map["insert_waypoint"] = blueye_service_task_client;
+  this->resource_to_client_map["remove_waypoint"] = blueye_service_task_client;
   
   // Add hard coded clients here 
   // if (!ok) {

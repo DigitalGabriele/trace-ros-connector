@@ -23,7 +23,7 @@ include_directories(
 # Build shared library (TRACE plugin)
 add_library(${PROJECT_NAME} SHARED
   src/connector.cc
-  src/specific_client.cc
+  src/blueye_service_task_client.cc
 )
 
 # Rename output so TRACE can discover plugin

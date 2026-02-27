@@ -23,11 +23,11 @@
 namespace trace {
 namespace blueye_ros_connector {
 
-class SpecificClient : public ServiceTaskInterface, public rclcpp::Node
+class BlueyeServiceTaskClient : public ServiceTaskInterface, public rclcpp::Node
 {
 public:
-  SpecificClient();
-  explicit SpecificClient(const std::string &node_name);
+  BlueyeServiceTaskClient();
+  explicit BlueyeServiceTaskClient(const std::string &node_name);
 
   void Connect() override;
   std::future<trace::Outcome> SendCommand(
@@ -36,7 +36,7 @@ public:
 
   void AbortCommand(const std::string &service_task_uuid) override;
 
-  virtual ~SpecificClient();
+  virtual ~BlueyeServiceTaskClient();
 
 private:
   using RunWaypointController = blueye_interfaces::srv::RunWaypointController;
