@@ -249,6 +249,7 @@ trace::Outcome BlueyeServiceTaskClient::RunTask(
   }
   const std::string resource_name = trim(resource_it->second);
 
+  // RUN WAYPOINT CONTROLLER SERVICE
   if (resource_name == "run_waypoint_controller") {
     if (!run_wp_client_->wait_for_service(service_wait_timeout_)) {
       return trace::Outcome(StatusCode::ERROR, "Service not available: /blueye/run_waypoint_controller");
@@ -287,6 +288,7 @@ trace::Outcome BlueyeServiceTaskClient::RunTask(
     return out;
   }
 
+  // GO TO WAYPOINTS SERVICE
   if (resource_name == "go_to_waypoints") {
     if (!go_to_waypoints_client_->wait_for_service(service_wait_timeout_)) {
       return trace::Outcome(StatusCode::ERROR, "Service not available: /blueye/go_to_waypoints");
@@ -324,6 +326,7 @@ trace::Outcome BlueyeServiceTaskClient::RunTask(
     return out;
   }
 
+  // CLEAR WAYPOINTS SERVICE
   if (resource_name == "clear_waypoints") {
     if (!clear_waypoints_client_->wait_for_service(service_wait_timeout_)) {
       return trace::Outcome(StatusCode::ERROR, "Service not available: /blueye/clear_waypoints");
@@ -360,6 +363,7 @@ trace::Outcome BlueyeServiceTaskClient::RunTask(
     return out;
   }
 
+  // GET WAYPOINT STATUS SERVICE
   if (resource_name == "get_waypoint_status") {
     if (!get_waypoint_status_client_->wait_for_service(service_wait_timeout_)) {
       return trace::Outcome(StatusCode::ERROR, "Service not available: /blueye/get_waypoint_status");
@@ -386,6 +390,7 @@ trace::Outcome BlueyeServiceTaskClient::RunTask(
     return out;
   }
 
+  // GET WAYPOINTS SERVICE
   if (resource_name == "get_waypoints") {
     if (!get_waypoints_client_->wait_for_service(service_wait_timeout_)) {
       return trace::Outcome(StatusCode::ERROR, "Service not available: /blueye/get_waypoints");
@@ -424,6 +429,7 @@ trace::Outcome BlueyeServiceTaskClient::RunTask(
     return out;
   }
 
+  // INSERT WAYPOINT SERVICE
   if (resource_name == "insert_waypoint") {
     if (!insert_waypoint_client_->wait_for_service(service_wait_timeout_)) {
       return trace::Outcome(StatusCode::ERROR, "Service not available: /blueye/insert_waypoint");
@@ -519,6 +525,7 @@ trace::Outcome BlueyeServiceTaskClient::RunTask(
     return out;
   }
 
+  // REMOVE WAYPOINT SERVICE
   if (resource_name == "remove_waypoint") {
     if (!remove_waypoint_client_->wait_for_service(service_wait_timeout_)) {
       return trace::Outcome(StatusCode::ERROR, "Service not available: /blueye/remove_waypoint");

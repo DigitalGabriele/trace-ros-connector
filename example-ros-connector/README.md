@@ -1,1 +1,0 @@
-# example-ros-connector
